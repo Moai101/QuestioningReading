@@ -15,7 +15,6 @@ public class DiaryDbHelper extends SQLiteOpenHelper {
             "("+ DiaryEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
             DiaryEntry.COLUMN_TITLE+ " TEXT DEFAULT UNKNOWN," +
             DiaryEntry.COLUMN_DATE+" TEXT, "+
-            DiaryEntry.COLUMN_IMAGE_DATA +" BLOB, " +
             DiaryEntry.COLUMN_DESCRIPTION +" TEXT, " +
             DiaryEntry.COLUMN_DESCRIPTION1 +" TEXT, " +
             DiaryEntry.COLUMN_DESCRIPTION2 +" TEXT, " +

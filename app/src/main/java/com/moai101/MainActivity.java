@@ -215,9 +215,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
              Intent intent = new Intent(MainActivity.this,UserProfileActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.nav_send:
-               emailIntent();
-                return true;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -225,22 +222,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void emailIntent() {
-//        ACTION_SENDTO（添付ファイルがない場合のメールを作成）
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:"));
-        intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback regarding myDiary app");
-        intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"ishitasharma12699@gmail.com"});
-        if(intent.resolveActivity(getPackageManager())!=null){
-            startActivity(intent);
-        }
-
-    }
 // リスト画面の全日記を表示するときの処理
     private final static int URL_LOADER= 0;
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] projection = {DiaryEntry._ID, DiaryEntry.COLUMN_TITLE, DiaryEntry.COLUMN_DATE, DiaryEntry.COLUMN_IMAGE_DATA};
+        String[] projection = {DiaryEntry._ID, DiaryEntry.COLUMN_TITLE, DiaryEntry.COLUMN_DATE};
         switch (id){
             case URL_LOADER:
                 return new CursorLoader(this,DiaryEntry.CONTENT_URI,projection,null,null,"_ID desc");

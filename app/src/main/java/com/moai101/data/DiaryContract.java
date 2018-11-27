@@ -61,8 +61,6 @@ public final class DiaryContract {
         public static final String COLUMN_DESCRIPTION20 = "description20";
         public static final String COLUMN_DESCRIPTION21 = "description21";
 
-        public static final String COLUMN_IMAGE_DATA ="image_data";
-
 
 
 

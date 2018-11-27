@@ -37,7 +37,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     private static final int RESULT_TITLE_SPEECH = 100;
     private static final int RESULT_DESCRIPTION_TEXT = 101;
-    private static ImageView image_view_detail_activity;
     private static EditText title_text_view;
     private static TextView date_text_view;
     private static EditText description_text_view;
@@ -84,7 +83,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             getLoaderManager().initLoader(LOADER_ID,null,this);
         }
 
-        image_view_detail_activity= (ImageView)findViewById(com.moai101.R.id.detail_activity_image_view);
         title_text_view=(EditText) findViewById(com.moai101.R.id.title_note);
         date_text_view= (TextView)findViewById(com.moai101.R.id.date_detail_activity);
         description_text_view=(EditText)findViewById(com.moai101.R.id.description_detail_Activity);
@@ -135,15 +133,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             }
         });
 
-        image_view_detail_activity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DetailActivity.this,ImageActivity.class);
-                intent.setData(CURRENT_DIARY_URI);
-                startActivity(intent);
-            }
-        });
-        image_view_detail_activity.setOnTouchListener(mTouchListener);
+
         date_range.setOnTouchListener(mTouchListener);
         title_text_view.setOnTouchListener(mTouchListener);
         description_text_view.setOnTouchListener(mTouchListener);
@@ -311,15 +301,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         }
     }
 
-    private static byte[] image_view_set_byte;
-    private static boolean has_set_image_byte= false;
-    //日記の中で入力された画像をセットするまでの処理
-    public static void setImagebyte(byte[] image_byte){
-        image_view_set_byte=image_byte;
-        has_set_image_byte=true;
-        Bitmap bitmap = DbBitmapUtils.getImage(image_byte);
-        image_view_detail_activity.setImageBitmap(bitmap);
-    }
+
     //入力されたデータをinsertし保存するまでの処理
     private void saveDiary(Uri saveUri) {
         ContentValues values = new ContentValues();
@@ -348,19 +330,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         String description19 = description19_text_view.getText().toString();
         String description20 = description20_text_view.getText().toString();
         String description21 = description21_text_view.getText().toString();
-        byte[] image_bytes;
-        //if(has_set_image_byte) {
-        BitmapDrawable drawable = (BitmapDrawable) image_view_detail_activity.getDrawable();
-        Bitmap bitmap = drawable.getBitmap();
-        image_bytes= DbBitmapUtils.getBytes(bitmap);
-        /**}
-         else{
-         image_view_detail_activity.setImageResource(R.mipmap.person_image);
-         BitmapDrawable drawable = (BitmapDrawable) image_view_detail_activity.getDrawable();
-         Bitmap bitmap = drawable.getBitmap();
-         image_bytes= DbBitmapUtils.getBytes(bitmap);
-         }
-         **/
+
 
         values.put(DiaryEntry.COLUMN_TITLE,title);
         values.put(DiaryEntry.COLUMN_DATE,date);
@@ -387,8 +357,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         values.put(DiaryEntry.COLUMN_DESCRIPTION20,description20);
         values.put(DiaryEntry.COLUMN_DESCRIPTION21,description21);
 
-        values.put(DiaryEntry.COLUMN_IMAGE_DATA, image_bytes);
-
         Toast toast;
         String message;
 
@@ -409,7 +377,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         }
         toast= Toast.makeText(this,message,Toast.LENGTH_SHORT);
         toast.show();
-        has_set_image_byte=false;
         MainActivity.has_diary=true;
         finish();
     }
@@ -437,7 +404,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         String[] projection= {DiaryEntry._ID,
                 DiaryEntry.COLUMN_TITLE,
                 DiaryEntry.COLUMN_DATE,
-                DiaryEntry.COLUMN_IMAGE_DATA,
                 DiaryEntry.COLUMN_DESCRIPTION,
                 DiaryEntry.COLUMN_DESCRIPTION1,
                 DiaryEntry.COLUMN_DESCRIPTION2,
@@ -479,13 +445,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             data.moveToFirst();
             String title = data.getString(data.getColumnIndex(DiaryEntry.COLUMN_TITLE));
             String date = data.getString(data.getColumnIndex(DiaryEntry.COLUMN_DATE));
-            byte[] image_byte = data.getBlob(data.getColumnIndex(DiaryEntry.COLUMN_IMAGE_DATA));
-            if (image_byte == null) {
-                image_view_detail_activity.setImageResource(com.moai101.R.mipmap.book);
-            } else {
-                Bitmap bitmap = DbBitmapUtils.getImage(image_byte);
-                image_view_detail_activity.setImageBitmap(bitmap);
-            }
+
 
             String description = data.getString(data.getColumnIndex(DiaryEntry.COLUMN_DESCRIPTION));
             String description1 = data.getString(data.getColumnIndex(DiaryEntry.COLUMN_DESCRIPTION1));
