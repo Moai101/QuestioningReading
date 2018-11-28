@@ -27,13 +27,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdSize;
 import com.moai101.data.DiaryContract.DiaryEntry;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+    private AdView mAdView;
 
     private static final int RESULT_TITLE_SPEECH = 100;
     private static final int RESULT_DESCRIPTION_TEXT = 101;
@@ -70,6 +76,14 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.moai101.R.layout.activity_detail);
+        MobileAds.initialize(this, "ca-app-pub-9467222043863055~2106892666");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-9467222043863055/5387538418");
         Intent intent =getIntent();
         CURRENT_DIARY_URI=intent.getData();
 //

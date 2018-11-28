@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "832006927247",
+    "firebase_url": "https://moaiproject-83e9a.firebaseio.com",
+    "project_id": "moaiproject-83e9a",
+    "storage_bucket": "moaiproject-83e9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832006927247:android:baef84e039ad5ba8",
+        "android_client_info": {
+          "package_name": "com.moai101"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832006927247-lutjtqd567bja0ju7ltlmt872lpjqlvf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx-U_GRWylAzQZ_iqp-AE1swk_Krkle6Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-9467222043863055~2106892666"
+    }
+  ],
+  "configuration_version": "1"
+}

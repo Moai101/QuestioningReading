@@ -62,4 +62,5 @@
         android:id="@+id/user_notes_edit_text_view"
         android:textCursorDrawable="@null"/>
     </ScrollView>
+
 </LinearLayout>
